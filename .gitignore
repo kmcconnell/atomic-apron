@@ -1,0 +1,12 @@
+# Ignores VS Code-specific settings and workspace configurations.
+.vscode/
+.venv/
+
+# Ignore distribution folders
+dist/
+build/
+*.egg-info/
+
+# Ignores system files created by macOS (.DS_Store) and Windows (Thumbs.db).
+.DS_Store
+Thumbs.db
