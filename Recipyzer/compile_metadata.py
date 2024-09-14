@@ -1,7 +1,8 @@
 import os
-import frontmatter
+import shutil
 import urllib.parse
 from collections import defaultdict
+import frontmatter
 
 # Base directory for your recipe collection
 BASE_DIR = 'recipes'
@@ -18,6 +19,12 @@ HOLIDAYS_DIR = os.path.join(METADATA_DIR, 'Holidays')
 def ensure_dir(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
+
+# Function to clear the index directory
+def clear_index_directory():
+    if os.path.exists(METADATA_DIR):
+        shutil.rmtree(METADATA_DIR)
+    ensure_dir(METADATA_DIR)
 
 # Function to update metadata files with a table format
 def update_metadata(metadata, base_dir, type_):
@@ -124,9 +131,11 @@ def compile_metadata(base_dir):
     update_metadata(holidays_metadata, HOLIDAYS_DIR, 'holiday')
 
 def main():
-    print('Compiling metadata...')
+    print('Clearing the metadata directory...')
+    clear_index_directory()
+    print('Compiling the metadata directory...')
     compile_metadata(BASE_DIR)
-    print('Metadata compilation complete.')
+    print('The metadata has been compiled successfully!')
 
 # Run the metadata compilation
 if __name__ == '__main__':
