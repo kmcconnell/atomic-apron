@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="recipyzer",
-    version="0.1.0-alpha.1",
+    version="0.1.0-alpha.2",
     author="Kane McConnell",
     description="A toolkit for managing and organizing the Recipyzer recipe repository.",
     long_description=open('./Recipyzer/README.md', encoding='utf-8').read(),
