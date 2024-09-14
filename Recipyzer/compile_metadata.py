@@ -1,12 +1,13 @@
 import os
 import frontmatter
+import urllib.parse
 from collections import defaultdict
 
 # Base directory for your recipe collection
 BASE_DIR = 'recipes'
 
 # Directories for metadata files
-METADATA_DIR = os.path.join(BASE_DIR, 'Metadata')
+METADATA_DIR = 'index'
 TAGS_DIR = os.path.join(METADATA_DIR, 'Tags')
 CUISINE_DIR = os.path.join(METADATA_DIR, 'Cuisine')
 INGREDIENTS_DIR = os.path.join(METADATA_DIR, 'Ingredients')
@@ -27,40 +28,42 @@ def update_metadata(metadata, base_dir, type_):
         with open(file_path, 'w') as f:
             key_display = key.replace('-', ' ').capitalize()
             f.write(f'# {key_display} Recipes\n\n')
-            f.write(f'## List of {type_.capitalize()} Recipes\n\n')
+            # f.write(f'## List of {type_.capitalize()} Recipes\n\n')
             f.write('| Recipe | Category | Cuisine | Tags |\n')
             f.write('|--------|----------|---------|------|\n')
-            for item in items:
+            
+            # Sort items alphabetically by title
+            sorted_items = sorted(items, key=lambda x: x['title'])
+            
+            for item in sorted_items:
+                item_path = f"../../{urllib.parse.quote(item['path'].replace('\\', '/'))}" # Fix for Windows paths
                 category_link = f"[{item['category']}]({category_to_link(item['category'])})"
                 cuisine_link = f"[{item['cuisine']}]({cuisine_to_link(item['cuisine'])})"
                 tags_links = ', '.join([f"[{tag}]({tag_to_link(tag)})" for tag in item['tags']])
-                f.write(f'| [{item["title"]}]({item["path"]}) | {category_link} | {cuisine_link} | {tags_links} |\n')
+                f.write(f'| [{item["title"]}]({item_path}) | {category_link} | {cuisine_link} | {tags_links} |\n')
 
 # Helper functions to create links
 def category_to_link(category):
-    category_parts = category.split('/')
-    if len(category_parts) == 2:
-        return f"../../{category_parts[0]}/{category_parts[1].replace(' ', '-').lower()}.md"
-    return f"../../{category.replace(' ', '-').lower()}.md"
+    return f"../../{urllib.parse.quote(category.replace(' ', '-'))}/"
 
 def cuisine_to_link(cuisine):
-    return f"../Cuisine/{cuisine.replace(' ', '-').lower()}.md"
+    return f"../Cuisine/{urllib.parse.quote(cuisine.replace(' ', '-').lower())}.md"
 
 def tag_to_link(tag):
-    return f"../Tags/{tag.replace(' ', '-').lower()}.md"
+    return f"../Tags/{urllib.parse.quote(tag.replace(' ', '-').lower())}.md"
 
 def season_to_link(season):
-    return f"../Seasons/{season.replace(' ', '-').lower()}.md"
+    return f"../Seasons/{urllib.parse.quote(season.replace(' ', '-').lower())}.md"
 
 def holiday_to_link(holiday):
-    return f"../Holidays/{holiday.replace(' ', '-').lower()}.md"
+    return f"../Holidays/{urllib.parse.quote(holiday.replace(' ', '-').lower())}.md"
 
 # Function to extract metadata from a recipe file
 def extract_metadata(recipe_path, base_dir):
     with open(recipe_path, 'r') as f:
         post = frontmatter.load(f)
-    return {
-        'title': post['title'],
+    metadata = {
+        'title': post.get('title', 'Untitled'),
         'category': post.get('category', 'Uncategorized'),
         'cuisine': post.get('cuisine', 'Uncategorized'),
         'tags': post.get('tags', []),
@@ -69,6 +72,8 @@ def extract_metadata(recipe_path, base_dir):
         'holidays': post.get('holidays', []),
         'path': recipe_path.replace(base_dir + '/', '')
     }
+    print(f"Extracted metadata for {recipe_path}: {metadata}")
+    return metadata
 
 # Function to scan recipe directories and compile metadata
 def compile_metadata(base_dir):
@@ -118,6 +123,11 @@ def compile_metadata(base_dir):
     # Write holidays metadata to files
     update_metadata(holidays_metadata, HOLIDAYS_DIR, 'holiday')
 
+def main():
+    print('Compiling metadata...')
+    compile_metadata(BASE_DIR)
+    print('Metadata compilation complete.')
+
 # Run the metadata compilation
 if __name__ == '__main__':
-    compile_metadata(BASE_DIR)
+    main()

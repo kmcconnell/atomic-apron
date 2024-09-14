@@ -1,9 +1,9 @@
-# AtomicApron
+# Recipyzer
 
-![PyPI](https://img.shields.io/pypi/v/atomic-apron)
-![License](https://img.shields.io/github/license/kmcconnell/atomic-apron)
+![PyPI](https://img.shields.io/pypi/v/recipyzer)
+![License](https://img.shields.io/github/license/kmcconnell/recipyzer)
 
-Welcome to **AtomicApron**, a meticulously organized and richly categorized repository of recipes.Explore, cook, and savor the flavors with ease!
+Welcome to **Recipyzer**, a meticulously organized and richly categorized repository of recipes. Explore, cook, and savor the flavors with ease!
 
 ## Structure
 
@@ -13,7 +13,8 @@ The repository is organized into folders based on the type of recipes. Each reci
 
 Each recipe includes tags and metadata for easy search and filtering. You can explore recipes based on tags like vegetarian, vegan, gluten-free, dairy-free, low-carb, keto, paleo, and more. The metadata also includes cuisine types, ingredients, seasons, holidays, and dietary preferences.
 
-### Metadata Structure
+### Front Matter Structure
+
 ```yaml
 ---
 title: "Recipe Title"
@@ -64,9 +65,9 @@ This project is licensed under the MIT License for the repository structure and 
 
 ## Releasing and Publishing
 
-- **GitHub Releases**: Download the latest version of the repository from the [Releases](https://github.com/kmcconnell/atomic-apron/releases) page.
+- **GitHub Releases**: Download the latest version of the repository from the [Releases](https://github.com/kmcconnell/recipyzer/releases) page.
 
-- **Python Package**: Install the AtomicApron toolkit via PyPI.
+- **Python Package**: Install the Recipyzer toolkit via PyPI.
   ```bash
-  pip install atomic-apron
+  pip install recipyzer
   ```

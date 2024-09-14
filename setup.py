@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="atomic-apron",
-    version="0.1.0-alpha.0",
+    name="recipyzer",
+    version="0.1.0-alpha.1",
     author="Kane McConnell",
-    description="A toolkit for managing and organizing the AtomicApron recipe repository.",
-    long_description=open('README.md').read(),
+    description="A toolkit for managing and organizing the Recipyzer recipe repository.",
+    long_description=open('./Recipyzer/README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
-    url="https://github.com/kmcconnell/atomic-apron",
+    url="https://github.com/kmcconnell/recipyzer",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -15,4 +15,12 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    install_requires=[
+        'frontmatter'
+    ],
+    entry_points={
+        'console_scripts': [
+            'recipyzer=recipyzer.compile_metadata:main'
+        ]
+    }
 )

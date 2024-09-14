@@ -1,6 +1,6 @@
-# Contributing to AtomicApron
+# Contributing to Recipyzer
 
-Thank you for your interest in contributing to **AtomicApron**! We are excited to have your help in improving our repository. Before you get started, please take a moment to read the following guidelines.
+Thank you for your interest in contributing to **Recipyzer**! We are excited to have your help in improving our repository. Before you get started, please take a moment to read the following guidelines.
 
 ## How Can You Contribute?
 
@@ -23,7 +23,7 @@ At this time, we are only accepting new recipes from invited contributors. If yo
 2. **Clone your Fork**: Clone your forked repository to your local machine.
 
 ```bash
-git clone https://github.com/[your username]/atomic-apron.git
+git clone https://github.com/[your username]/recipyzer.git
 ```
 
 3. **Create a Branch**: Create a new branch for your changes.

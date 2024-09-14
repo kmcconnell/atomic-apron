@@ -1,2 +1,2 @@
-# AtomicApron/__init__.py
+# Recipyzer/__init__.py
 # (This file can be empty or contain package initialization code)
