@@ -51,7 +51,7 @@ def update_metadata(metadata, base_dir, type_):
 
 # Helper functions to create links
 def category_to_link(category):
-    return f"../../{urllib.parse.quote(category.replace(' ', '-'))}/"
+    return f"../../{BASE_DIR}/{urllib.parse.quote(category.replace(' ', '-'))}/"
 
 def cuisine_to_link(cuisine):
     return f"../Cuisine/{urllib.parse.quote(cuisine.replace(' ', '-').lower())}.md"
